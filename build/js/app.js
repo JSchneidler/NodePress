@@ -1,1 +1,0 @@
-var app=angular.module("app",["ui.router"]);app.config(["$stateProvider","$urlRouterProvider","$locationProvider",function(e,r,t){t.html5Mode(!0),r.otherwise("/"),e.state("index",{url:"/",templateUrl:"angular/views/index.html"})}]);
