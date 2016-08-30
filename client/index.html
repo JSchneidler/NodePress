@@ -7,12 +7,21 @@
 <body>
   <div ui-view></div>
 
-	<!-- JS dependencies -->
+	<!-- Components -->
+	<!-- build:js_components js/components.js -->
   <script type="text/javascript" src="components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="components/angular/angular.js"></script>
   <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.js"></script>
+  <!-- endbuild -->
 
   <!-- Angular App Files -->
+  <!-- build:js_app js/app.js -->
   <script type="text/javascript" src="angular/app.js"></script>
+  <!-- endbuild -->
+
+  <!-- JavaScript Files -->
+  <!-- build:js_all js/all.js -->
+  <script type="text/javascript" src="js/init.js"></script>
+  <!-- endbuild -->
 </body>
 </html>
