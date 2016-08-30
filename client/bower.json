@@ -1,0 +1,21 @@
+{
+  "name": "angular_node_skeleton",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Jordan Schneidler <jordan.schneidler@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "dist/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.7",
+    "angular-ui-router": "0.3.1",
+    "jquery": "3.1.0"
+  }
+}
