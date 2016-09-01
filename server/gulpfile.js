@@ -38,8 +38,8 @@ gulp.task('sass', ['clean'], function() {
         .pipe(gulp.dest('../build/css'));
 });
 
-gulp.task('usemin', ['clean'], function() {
-    return gulp.src('../client/index.html')
+gulp.task('usemin', ['clean', 'lint_client'], function() {
+    return gulp.src('../client/master.html')
         .pipe(usemin({
             js_components: [ uglify() ],
             js_app: [ uglify() ],
@@ -49,20 +49,18 @@ gulp.task('usemin', ['clean'], function() {
         .pipe(gulp.dest('../build/'));
 });
 
-gulp.task('copy', ['clean'], function() {
-    return gulp.src('../client/angular/views/**/*.html', { base: '../client' })
+gulp.task('copy', ['clean', 'lint_client'], function() {
+    return gulp.src(['../client/angular/views/**/*.html', '../client/components/font-awesome/css/font-awesome.min.css','../client/components/font-awesome/fonts/**/*'], { base: '../client' })
         .pipe(gulp.dest('../build'));
 });
 
-// Watch Files For Changes
-gulp.task('watch', function() {
-    gulp.watch('../client/**/*.js', ['clean', 'lint_client', 'usemin']);
-    gulp.watch('**/*.js', ['lint_server']);
-    gulp.watch('../client/scss/**/*.scss', ['clean', 'sass']);
+gulp.task('copy_dev', ['clean', 'lint_client'], function(){
+    return gulp.src(['../client/**/*', '!../client/scss', '!../client/scss/**/*', '!../client/.bowerrc', '!../client/bower.json'], { base: '../client' })
+        .pipe(gulp.dest('../build'));
 });
 
 // Default Task
-gulp.task('default', ['clean', 'lint_client', 'lint_server', 'copy', 'sass', 'usemin']);
+gulp.task('default', ['clean', 'lint_client', 'lint_server', 'copy_dev', 'sass']);
 
-// Lint task
-gulp.task('lint', ['lint_client', 'lint_server']);
+// Production Task
+gulp.task('prod', ['clean', 'lint_client', 'lint_server', 'copy', 'sass', 'usemin']);

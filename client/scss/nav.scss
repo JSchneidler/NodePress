@@ -1,0 +1,28 @@
+#nav {
+	background-color: black;
+	color: white;
+	margin-bottom: 15px;
+
+	.nav-container {
+		margin: 5px 0px;
+
+		> div {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.nav-brand {
+			margin-right: 10px;
+		}
+
+		.nav-user {
+			.username {
+				margin: 0;
+			}
+
+			* {
+				display: inline-block;
+			}
+		}
+	}
+}

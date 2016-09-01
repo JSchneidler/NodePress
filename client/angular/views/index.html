@@ -1,1 +1,68 @@
-<h2>hello</h2>
+<div post-area id="page-index" class="row">
+	<!-- New Post -->
+	<div ng-if="userIsModerator()" class="col-xs-12">
+		<div class="well new-post-form-container">
+			<form class="form" ng-submit="submitNewPost(title, content, user.id)">
+				<div class="form-group">
+					<label for="inputTitle">Title</label>
+					<input id="inputTitle" type="text" ng-model="title" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="inputContent">Body</label>
+					<div class="form-control" ckeditor="options" ng-model="content"></div>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+	<!-- /New Post -->
+
+	<!-- Post Index -->
+	<div id="index-posts-area" class="col-xs-12">
+		<!-- Posts Loading -->
+		<div ng-show="posts_loading" class="row icon-center">
+				<div class="col-xs-12">
+					<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+				</div>
+		</div>
+		<!-- /Posts Loading -->
+		<div ng-show="!posts_loading" class="row">
+			<!-- No Posts -->
+			<div ng-show="!have_posts()" class="col-xs-12">
+				<h3>No posts to display, sorry.</h3>
+			</div>
+			<!-- /No Posts -->
+			<div ng-show="have_posts()" class="col-xs-12">
+				<!-- Post -->
+				<div ng-repeat="post in posts | orderBy:'publish_date'" class="index-post panel panel-primary">
+					<!-- Post Manage -->
+					<div class="post-buttons-container panel-heading">
+						<div ng-if="userIsModerator()" class="moderator-buttons">
+							<button type="button" ng-click="deletePost(post)" class="post-btn delete-post-btn">
+								<i class="fa fa-trash fa-fw"></i>
+							</button>
+						</div>
+						<button type="button" ng-click="upvotePost(post)" class="post-btn upvote-post-btn">
+							<i class="fa fa-thumbs-up fa-fw"></i>
+						</button>
+						<p>{{ post.upvotes }}</p>
+					</div>
+					<!-- /Post Manage -->
+					<!-- Post Content -->
+					<div class="post-content panel-body">
+						<h2 class="post-title" ng-bind="post.title"></h2>
+						<div class="post-body" ng-bind-html="trust(post.body)"></div>
+					</div>
+					<!-- /Post Content -->
+					<!-- Post Meta -->
+					<div class="post-meta panel-footer">
+						<p>Post meta here</p>
+					</div>
+					<!-- /Post Meta -->
+				</div>
+				<!-- /Post -->
+			</div>
+		</div>
+	</div>
+	<!-- /Post Index -->
+</div>

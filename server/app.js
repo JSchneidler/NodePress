@@ -8,8 +8,6 @@ var mongoose = require('mongoose');
 
 var config = require('./config.js');
 
-var routes = require('./routes/all');
-
 var app = express();
 
 var db = mongoose.connect(config.mongo.url, function(err) {
@@ -27,7 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(config.server.distFolder));
 
-app.use('/', routes);
+app.use('/api', require('./app/routes/api'));
+app.use('/api', require('./app/routes/api_auth'));
+app.use('/api', require('./app/routes/api_comment'));
+app.use('/api', require('./app/routes/api_post'));
+app.use('/api', require('./app/routes/api_user'));
+app.use('/', require('./app/routes/angular'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,9 +46,8 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    res.json({
+      error: err.message
     });
   });
 }
@@ -54,9 +56,8 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
+  res.json({
+    error: err.message
   });
 });
 

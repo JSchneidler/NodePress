@@ -1,0 +1,32 @@
+<div id="page-user" class="row" ng-show="showUser">
+	<h3 ng-show="owner" class="welcome">Welcome, {{ user.username }}!</h3>
+	<div class="col-xs-12 well user-info">
+		<div class="col-xs-2 user-meta">
+			<h4 class="username" ng-bind="user.username"></h4>
+			<p ng-show="user.posts">{{ user.posts.length }} posts</p>
+			<p ng-show="user.comments">{{ user.comments.length }} comments</p>
+		</div>
+		<div class="col-xs-10 user-roles">
+			<p ng-show="user.admin">Site administrator</p>
+			<p ng-show="user.moderator">Site moderator</p>
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-6 user-posts">
+		<div class="well">
+			<h4>Recent posts</h4>
+			<div ng-repeat="post in user.posts | orderBy:'-date_published' track by post.id" class="well">
+				<h5 class="post-title" ng-bind="post.title"></h5>
+				<p class="post-body" ng-bind="excerpt(post.body)"></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-md-6 user-comments">
+		<div class="well">
+			<h4>Recent comments</h4>
+			<div ng-repeat="comment in user.comments | orderBy:'-date_published' track by comment.id" class="well">
+				<h5 class="comment-title" ng-bind="comment.title"></h5>
+				<p class="comment-body" ng-bind="excerpt(comment.body)"></p>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+#page-user {
+
+	.welcome {
+		text-align: center;
+	}
+
+	.user-meta {
+		margin-top: -10px;
+
+		.username {
+			text-align: center;
+			margin: 0;
+			padding-bottom: 5px;
+			border-bottom: 1px solid gray;
+		}
+	}
+
+	.user-posts {
+		padding-left: 0;
+		padding-right: 10px;
+	}
+
+	.user-comments {
+		padding-right: 0;
+		padding-left: 10px;
+	}
+
+	.comment-body,
+	.post-body {
+		word-wrap: break-word;
+	}
+}

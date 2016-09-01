@@ -1,0 +1,93 @@
+<html ng-app="app">
+<head>
+	<base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" charset="utf-8">
+
+  <!-- CSS Components -->
+  <!-- build:css css/vendor.css -->
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css">
+  <!-- endbuild -->
+
+  <!-- Font-Awesome doesn't really work with usemin -->
+  <link rel="stylesheet" type="text/css" href="components/font-awesome/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="MainCtrl">
+  <div id="pageContainer" class="container-fluid">
+
+    <!-- Nav -->
+    <nav id="nav" class="row">
+        <div class="col-xs-12 nav-container">
+            <div class="nav-brand">
+                <a ui-sref="index"><i class="fa fa-globe fa-2x"></i></a>
+            </div>
+            <div class="nav-user" ng-cloak>
+                <h4 class="username">{{ user.username || 'guest' | capitalize }}</h4>
+                <span ng-show="user">
+                    <a ng-click="logout()" class="btn btn-default">Logout</a>
+                    <a ui-sref="user.{{ user.username }}" class="btn btn-default">Profile</a>
+                </span>
+                <span ng-show="!user">
+                    <a ui-sref="login" class="btn btn-default">Login</a>
+                    <a ui-sref="register" class="btn btn-default">Register</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global error container -->
+    <div id="errors-container" ng-show="haveErrors()" class="well" ng-cloak>
+        <button type="button" ng-click="clearErrors()" class="btn delete-all-errors-btn">
+            <i class="fa fa-times-circle fa-fw"></i>
+        </button>
+        <div class="error-container" ng-repeat="error in errors">
+            <button type="button" ng-click="removeError(error)" class="btn delete-error-btn">
+                <i class="fa fa-times fa-fw"></i>
+            </button>
+            <p><span class="error-type"><b>{{ error.type }} error: </b></span><span class="error-text">{{ error.error }}</span></p>
+            <hr ng-if="errors.length > 1 && !$last">
+        </div>
+    </div>
+
+    <!-- Angular templates rendered here -->
+    <div ui-view></div>
+
+  </div>
+
+	<!-- JS Components -->
+	<!-- build:js_components js/components.js -->
+  <script src="components/jquery/dist/jquery.js"></script>
+  <script src="components/angular/angular.js"></script>
+  <script src="components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="components/angular-resource/angular-resource.js"></script>
+  <script src="components/angular-jwt/dist/angular-jwt.js"></script>
+  <script src="components/tinymce-dist/tinymce.js"></script>
+  <script src="components/angular-ui-tinymce/dist/tinymce.min.js"></script>
+  <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="components/moment/min/moment.min.js"></script>
+  <!-- endbuild -->
+
+  <!-- Angular App Files -->
+  <!-- build:js_app js/app.js -->
+  <script src="angular/app.js"></script>
+  <script src="angular/services/auth.js"></script>
+  <script src="angular/services/user.js"></script>
+  <script src="angular/services/post.js"></script>
+  <script src="angular/services/comment.js"></script>
+  <script src="angular/services/tokenhelper.js"></script>
+  <script src="angular/services/error.js"></script>
+  <script src="angular/controllers/MainCtrl.js"></script>
+  <script src="angular/controllers/AuthCtrl.js"></script>
+  <script src="angular/controllers/ProfileCtrl.js"></script>
+  <script src="angular/filters/capitalize.js"></script>
+  <script src="angular/directives/postArea.js"></script>
+  <!-- endbuild -->
+
+  <!-- JavaScript Files -->
+  <!-- build:js_all js/all.js -->
+  <script type="text/javascript" src="js/init.js"></script>
+  <script type="text/javascript" src="js/comment-toggle.js"></script>
+  <!-- endbuild -->
+</body>
+</html>
